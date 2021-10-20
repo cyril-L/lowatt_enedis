@@ -409,6 +409,7 @@ def point_detailed_measures(client, args):
     injection = get_option(args, "injection")
     demande.soutirage = _boolean(not injection)
     demande.injection = _boolean(injection)
+    #demande.accordClient = _boolean(False)
     demande.accordClient = _boolean(True)
 
     return client.service.consulterMesuresDetaillees(demande)
@@ -577,8 +578,8 @@ def point_cmd_infra_j(client, args):
         args,
         xs_accord_type="ns1:DeclarationAccordClientType",
     )
-    accord.injection = _boolean(False)
-    accord.soutirage = _boolean(False)
+    accord.injection = _boolean(get_option(args, "injection"))
+    accord.soutirage = _boolean(get_option(args, "soutirage"))
     return client.service.commanderTransmissionDonneesInfraJ(demande)
 
 
